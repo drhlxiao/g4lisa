@@ -1,0 +1,34 @@
+/run/initialize
+/run/initialize
+/vis/scene/create
+/vis/open OGLSQt
+#/vis/open OGL
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+/vis/drawVolume
+/vis/viewer/set/viewpointThetaPhi 270 0.
+/vis/viewer/set/auxiliaryEdge true
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByCharge
+/vis/scene/add/hits
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+/vis/scene/endOfEventAction accumulate 
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
+/vis/viewer/set/background 0.99 0.99 0.99
+
+
+/vis/scene/add/axes 0 0 0 10 mm
+
+/gps/particle gamma
+/gps/pos/type Plane
+/gps/pos/shape Circle
+/gps/pos/radius  8 cm
+/gps/pos/centre 00 0. -20  cm #detector center
+
+/gps/direction 0 0  1
+
+/gps/energy 20 keV
+
+/run/beamOn 5

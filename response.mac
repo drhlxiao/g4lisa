@@ -1,0 +1,22 @@
+#/stix/geo/gdml WorldAttOut
+/run/initialize
+/control/verbose 0
+/tracking/verbose 0
+
+/gps/particle gamma
+/gps/pos/type Plane
+/gps/pos/shape Square
+/gps/pos/halfx 50 mm  # half-length in X (i.e. full width = 12 mm)
+/gps/pos/halfy 50 mm  # half-length in Y (i.e. full height = 12 mm)
+/gps/pos/centre 0. 0. -20. cm  # detector center (same as before)
+/gps/direction 0 0 1  # emit toward -Z
+
+#/gps/energy 100 keV
+
+/gps/ene/type Lin
+/gps/ene/min 3 keV
+/gps/ene/max  150 keV
+/gps/ene/intercept 1
+/gps/ene/gradient 0
+
+/run/beamOn 10000000
