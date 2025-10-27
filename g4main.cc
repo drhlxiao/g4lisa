@@ -137,14 +137,6 @@ int main(int argc, char **argv) {
   // CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
   analysisManager->SetOutputFileName(outputFilename);
 
-  if (trackKilledVolumn.contains("grids")) {
-	  G4cout<<">>Tracks will be killed in grids..."<<G4endl;
-    analysisManager->KillTracksInGrids();
-  } 
-  if(trackKilledVolumn.contains("pix")) {
-	  G4cout<<">>Tracks will be killed Pixels..."<<G4endl;
-    analysisManager->KillTracksInDetectors();
-  }
   analysisManager->SetCommandLine(commandLine);
 
   //#ifdef G4MULTITHREADED

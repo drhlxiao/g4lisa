@@ -36,24 +36,9 @@ public:
 private:
 
   G4String fWorldFile;
-  G4LogicalVolume *worldLogical, *berylliumWindowLog,*alumWindowLog;
-  G4LogicalVolume *padsLogical, *cdTeLogical, *calisteBaseLogical;
-  G4Material *CdTe;
-  G4Material *Epoxy, *FR4, *Resin, *SilverEpoxy;
-  G4Material *Tungsten, *Alum, *Alum7075, *Iron, *Vacuum, *Air, *Alu25, *Gold, *berylliumMat, 
-      *Kapton, *Nickle, *Siliver, *LeadPadMat, *goldLayerMaterial, *Platinum, *stripTungstenEquivalent,
-      *Copper, *SiO2, *padStackMaterial, *blackHole;
-
-  G4LogicalVolume *ConstructCaliste();
-  G4LogicalVolume *ConstructCalisteBase();
-  G4LogicalVolume *ConstructCdTe();
-  G4AssemblyVolume *ConstructPads();
+  G4LogicalVolume *worldLogical;
+  G4Material *Tungsten,*Vacuum, *blackHole;
   bool checkOverlaps;
-  bool isSingleDetector;
-
-  // caliste
-
-  G4bool cflConstructed, bkgConstructed;
   G4RotationMatrix rotMatrix;
 
   G4VPhysicalVolume *worldPhysical;
