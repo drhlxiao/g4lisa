@@ -92,10 +92,8 @@ G4VPhysicalVolume *DetectorConstruction::Construct() {
 	G4Element *elN = nist->FindOrBuildElement("N");
 	G4Element *elW = nist->FindOrBuildElement("W");
 
-	// 2/ Molding resin
-	// Use the following mixture
-	//+ density of the mixture 1.77
-
+    blackHole=new G4Material("blackHole",1e100*g/cm3, 1);
+    blackHole->AddElement(elH,1);
 
 	// construct world
 	G4Box *worldSolid = new G4Box("worldSolid", 50 * cm, 50 * cm, 50 * cm);

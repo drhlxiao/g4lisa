@@ -94,7 +94,7 @@ void AnalysisManager::InitRun(const G4Run *run)
 	inpTree->Branch("boundary", &boundary, "boundary/I");
 	inpTree->Branch("pixelID", &pixelID, "pixelID/I");
 	inpTree->Branch("detectorID", &detectorID, "detectorID/I");
-	inpTree->Branch("v", inpVec, "v[3]/D");
+	inpTree->Branch("direction", inpVec, "direction[3]/D");
 	inpTree->Branch("theta", &inpTheta, "theta/D");
 	inpTree->Branch("energy", &inpEnergy, "energy/D");
 	inpTree->Branch("pdg", &inpPDG, "pdg/I");
