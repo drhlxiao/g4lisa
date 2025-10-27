@@ -31,7 +31,7 @@ plt.hist2d(
     cmap="viridis", 
 # norm=LogNorm()  # <-- logarithmic color scale
 )
-plt.colorbar(label="Counts (log scale)")
+plt.colorbar(label="Counts ")
 plt.xlabel("X [mm]")
 plt.ylabel("Y [mm]")
 plt.title("2D Histogram of Hit Positions")
