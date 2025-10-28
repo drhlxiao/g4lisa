@@ -102,9 +102,9 @@ G4VPhysicalVolume *DetectorConstruction::Construct() {
 	worldPhysical = new G4PVPlacement(0, G4ThreeVector(0, 0, 0), worldLogical,
 			"worldPhysical", 0, false, 0);
 
-	G4double plateHalfWidth =50*mm;
+	G4double plateHalfWidth =110*mm/2;
 	G4double plateHalfDepth=15*mm;
-	G4double pitchHalfWidth=0.05*mm;
+	G4double pitchHalfWidth=115*um/2;
 
 	G4double detectorHalfDepth=10*mm;
 

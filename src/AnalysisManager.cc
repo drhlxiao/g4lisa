@@ -90,10 +90,10 @@ void AnalysisManager::InitRun(const G4Run *run)
 	inpTree->Branch("pos", inpPos, "pos[3]/D");
 	inpTree->Branch("E0", &gunEnergy, "E0/D");
 	inpTree->Branch("eventID", &eventID, "eventID/I");
-	inpTree->Branch("itrack", &itrack, "itrack/I");
-	inpTree->Branch("boundary", &boundary, "boundary/I");
-	inpTree->Branch("pixelID", &pixelID, "pixelID/I");
-	inpTree->Branch("detectorID", &detectorID, "detectorID/I");
+//	inpTree->Branch("itrack", &itrack, "itrack/I");
+//	inpTree->Branch("boundary", &boundary, "boundary/I");
+//	inpTree->Branch("pixelID", &pixelID, "pixelID/I");
+//	inpTree->Branch("detectorID", &detectorID, "detectorID/I");
 	inpTree->Branch("direction", inpVec, "direction[3]/D");
 	inpTree->Branch("theta", &inpTheta, "theta/D");
 	inpTree->Branch("energy", &inpEnergy, "energy/D");
