@@ -221,6 +221,7 @@ void AnalysisManager::FillDetectorIncidentParticle(const G4Step *aStep)
 	inpEnergy = preStep->GetKineticEnergy() / keV;
 	const G4Track *track = aStep->GetTrack();
 	G4ThreeVector prePos = postStep->GetPosition();
+	inpPDG=track->GetDefinition()->GetPDGEncoding();
 
 	G4double px, py, pz;
 	// G4cout<<"filling2 "<<G4endl;
