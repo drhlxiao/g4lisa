@@ -93,7 +93,7 @@ def process_file(fname):
     ax5.set_xlabel('Theta (deg)')
     ax5.set_ylabel('Counts')
     ax5.set_yscale('log')
-    ax5.set_title(f'Incident Angle')
+    ax5.set_title(f'Distribution of Incident Angle at the detector')
     ax5.grid(True, alpha=0.3)
 
 

@@ -104,7 +104,8 @@ G4VPhysicalVolume *DetectorConstruction::Construct() {
 
 	G4double plateHalfWidth =110*mm/2;
 	G4double plateHalfDepth=15*mm;
-	G4double pitchHalfWidth=115*um/2;
+
+	G4double slitHalfWidth=115*um/2;
 
 	G4double detectorHalfDepth=10*mm;
 
@@ -115,20 +116,21 @@ G4VPhysicalVolume *DetectorConstruction::Construct() {
 				false, 0, true);
 
 
-	G4Box *tungstenPitch= new G4Box("TungstenPitch", pitchHalfWidth, plateHalfWidth, plateHalfDepth); //
-	G4LogicalVolume *tungstenPitchLog=new G4LogicalVolume(tungstenPitch, Vacuum, "tungstenPitch", 0, 0, 0);
+	G4Box *slitStrip= new G4Box("Tungstenslit", slitHalfWidth, plateHalfWidth, plateHalfDepth); //
+	G4LogicalVolume *slitLog=new G4LogicalVolume(slitStrip, Vacuum, "slitStrip", 0, 0, 0);
 
-	G4double px = -plateHalfWidth +2*pitchHalfWidth;
+	G4double px = -plateHalfWidth +2*slitHalfWidth;
 	int i=0;
 
-	while(px<plateHalfWidth-2*pitchHalfWidth)
+	while(px<plateHalfWidth-2*slitHalfWidth)
 	{
-		new G4PVPlacement(0, G4ThreeVector(px, 0, 0), tungstenPitchLog,
-				"tungstenPitch", TungstenWindowLog, false, i, true);
-		px+= pitchHalfWidth *4;
+		new G4PVPlacement(0, G4ThreeVector(px, 0, 0), slitLog,
+				"slitStrip", TungstenWindowLog, false, i, true);
+
+		px+= slitHalfWidth *4; //+330 um
 		i++;
 	}
-	G4cout<<i<<" pitch created!"<<G4endl;
+	G4cout<<i<<" slit created!"<<G4endl;
 
 	G4Box *detectorBox= new G4Box("detectorBox", plateHalfWidth, plateHalfWidth, detectorHalfDepth); //
 																									 //
