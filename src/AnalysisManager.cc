@@ -30,6 +30,7 @@
 bool DEBUG = false;
 const int MAX_NUM_TREE_TO_FILL = 1000000;
 
+//G4double detectorZ=41.5*cm;
 AnalysisManager *AnalysisManager::fManager = 0;
 AnalysisManager *AnalysisManager::GetInstance()
 {
@@ -57,7 +58,7 @@ AnalysisManager::AnalysisManager()
 void AnalysisManager::CopyMacrosToROOT(TFile *f, TString &macfilename)
 {
 	G4cout << "Copying macros from file " << macfilename << " to root file"
-		   << G4endl;
+		<< G4endl;
 	if (macfilename == "" || !f)
 		return;
 	std::ifstream infile(macfilename.Data());
@@ -85,15 +86,15 @@ void AnalysisManager::CopyMacrosToROOT(TFile *f, TString &macfilename)
 void AnalysisManager::InitRun(const G4Run *run)
 {
 	rootFile = new TFile(outputFilename.Data(), "recreate");
-	
+
 	inpTree = new TTree("inp", "inp");
 	inpTree->Branch("pos", inpPos, "pos[3]/D");
 	inpTree->Branch("E0", &gunEnergy, "E0/D");
 	inpTree->Branch("eventID", &eventID, "eventID/I");
-//	inpTree->Branch("itrack", &itrack, "itrack/I");
-//	inpTree->Branch("boundary", &boundary, "boundary/I");
-//	inpTree->Branch("pixelID", &pixelID, "pixelID/I");
-//	inpTree->Branch("detectorID", &detectorID, "detectorID/I");
+	//	inpTree->Branch("itrack", &itrack, "itrack/I");
+	//	inpTree->Branch("boundary", &boundary, "boundary/I");
+	//	inpTree->Branch("pixelID", &pixelID, "pixelID/I");
+	//	inpTree->Branch("detectorID", &detectorID, "detectorID/I");
 	inpTree->Branch("direction", inpVec, "direction[3]/D");
 	inpTree->Branch("theta", &inpTheta, "theta/D");
 	inpTree->Branch("energy", &inpEnergy, "energy/D");
@@ -107,7 +108,7 @@ void AnalysisManager::InitRun(const G4Run *run)
 	primTree->Branch("E0", &gunEnergy, "E0/D");
 
 	h2xy = new TH2F("h2xy", "Locations of hits; X (mm); Y(mm)", 1800, -90, 90,
-					1800, -90, 90);
+			1800, -90, 90);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -133,7 +134,7 @@ void AnalysisManager::ProcessEvent(const G4Event *event)
 {
 	eventID = event->GetEventID();
 	G4bool effectiveEvent = false;
-	
+
 
 	if (numSourceTreeFilled < 100000)
 	{
@@ -192,18 +193,34 @@ void AnalysisManager::CloseROOT()
 
 void AnalysisManager::ProcessStep(const G4Step *aStep)
 {
+	if(!aStep)return;	
 
 	UpdateParticleGunInfo();
 
 	G4double px, py, pz;
 	G4double edep;
-	G4String volName;
-	const G4Track *track = aStep->GetTrack();
+	G4String volName, preVolName;
 
-	if (track->GetVolume())
-		volName = track->GetVolume()->GetName();
+	G4StepPoint *preStep = aStep->GetPreStepPoint();
+	G4StepPoint *postStep = aStep->GetPostStepPoint();
 
-	if (volName == "detector")
+	if(!postStep||!preStep)return;
+	//const G4Track *track = aStep->GetTrack();
+	if (postStep) {
+		G4ThreeVector postPos = postStep->GetPosition();
+		if (postStep->GetPhysicalVolume()) {
+			volName= postStep->GetPhysicalVolume()->GetName();
+		}
+	}
+
+	if (preStep) {
+	G4ThreeVector	prePos = preStep->GetPosition();
+		if (preStep->GetPhysicalVolume()) {
+			preVolName= preStep->GetPhysicalVolume()->GetName();
+		}
+	}
+
+	if (volName == "detector" && preVolName!="detector")
 	{ 
 		// don't store too many tracks
 		FillDetectorIncidentParticle(aStep);
@@ -235,14 +252,16 @@ void AnalysisManager::FillDetectorIncidentParticle(const G4Step *aStep)
 	inpVec[0] = inpV.x();
 	inpVec[1] = inpV.y();
 	inpVec[2] = inpV.z();
-	inpTheta = asin(sqrt(inpVec[1] * inpVec[1] + inpVec[2] * inpVec[2])) * 180 /
-			   3.1415926;
+
+	inpTheta=atan2( sqrt(inpVec[0]*inpVec[0]+inpVec[1]*inpVec[1]),
+				inpVec[2]) * 180/3.1415926;
 
 	inpPos[0] = px;
 	inpPos[1] = py ;
 	inpPos[2] = pz ;
 
 	inpTree->Fill();
+
 	numInpTreeFilled++;
 	//}
 }

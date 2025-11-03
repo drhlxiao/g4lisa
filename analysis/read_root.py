@@ -24,7 +24,6 @@ pdg_mapping={
         22:'gamma',
         11:'e-',
         -11:'e+'
-
         }
 
 # Example: iterate over events if needed
