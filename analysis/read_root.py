@@ -2,7 +2,7 @@ import uproot
 import numpy as np
 
 # Open ROOT file
-file = uproot.open("2mev.root")
+file = uproot.open("nc.root")
 
 # Get the tree
 tree = file["inp"]

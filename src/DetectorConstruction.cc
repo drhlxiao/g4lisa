@@ -121,13 +121,17 @@ G4VPhysicalVolume *DetectorConstruction::Construct() {
 
 	G4double px = -plateHalfWidth +2*slitHalfWidth;
 	int i=0;
+	G4cout<<"## Center of Slit "<<G4endl;
 
 	while(px<plateHalfWidth-2*slitHalfWidth)
 	{
 		new G4PVPlacement(0, G4ThreeVector(px, 0, 0), slitLog,
-				"slitStrip", TungstenWindowLog, false, i, true);
+				"slitStrip", TungstenWindowLog, false, i, false);
 
+		G4cout<<i<<", "<<px<<G4endl;
 		px+= slitHalfWidth *4; //+330 um
+							
+
 		i++;
 	}
 	G4cout<<i<<" slit created!"<<G4endl;

@@ -10,7 +10,7 @@
 /gps/pos/centre 0. 0. -20. cm  # detector center (same as before)
 /gps/direction 0 0 1  # emit toward -Z
 
-/gps/energy 2000 keV
+/gps/energy 2.230 MeV
 
 #/gps/ene/type Lin
 #/gps/ene/min 3 keV
@@ -19,4 +19,4 @@
 #/gps/ene/gradient 0
 
 
-/run/beamOn 200000
+/run/beamOn 10000000
