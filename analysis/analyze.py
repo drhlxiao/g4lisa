@@ -92,6 +92,7 @@ def process_file(fname):
     ax5.hist(theta[theta_mask], bins=100, color='red', alpha=0.7, edgecolor='black')
     ax5.set_xlabel('Theta (deg)')
     ax5.set_ylabel('Counts')
+    ax5.set_yscale('log')
     ax5.set_title(f'Incident Angle')
     ax5.grid(True, alpha=0.3)
 
